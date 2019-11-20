@@ -1,0 +1,11 @@
+version: '3.7'
+
+services:
+
+  sqlserver:
+    image: github.com/ghstahl/hello-echo-container/hello-echo:latest
+    container_name: hello-echo-container
+    ports:
+      - "1323:1323"
+    environment:
+      - ACCEPT_EULA=Y 
