@@ -1,0 +1,11 @@
+version: '3.7'
+
+services:
+
+  sqlserver:
+    image: acrhackfestherb6297.azurecr.io/hackfest/hello-echo:master.4
+    container_name: hello-echo-container
+    ports:
+      - "1323:1323"
+    environment:
+      - ACCEPT_EULA=Y 
