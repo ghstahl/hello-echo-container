@@ -1,0 +1,7 @@
+kind: Namespace
+apiVersion: v1
+metadata:
+  name: ns-hello-echo
+  labels:
+    name: hello-echo
+ 

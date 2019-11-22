@@ -4,6 +4,7 @@ $version
 )
 Write-Host $version
 
+go mod download
 
 Write-Host "Script:" $PSCommandPath
 Write-Host "Path:" $PSScriptRoot
