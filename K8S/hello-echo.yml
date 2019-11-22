@@ -1,0 +1,52 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  labels:
+    system: hello-echo
+    app: hello-echo
+    version: "1.0"
+  name: dp-hello-echo
+  namespace: ns-dev
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        system: hello-echo
+        app: hello-echo
+        version: "1.0"
+    spec:
+      containers:
+      - env:
+        - name: ASPNETCORE_ENVIRONMENT
+          value: Production
+        image: acrhackfestherb6297.azurecr.io/hackfest/hello-echo:master.1
+        imagePullPolicy: IfNotPresent
+        name: hello-echo
+        ports:
+        - containerPort: 1323
+      restartPolicy: Always
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    system: hello-echo
+    app: hello-echo
+    version: "1.0"
+  name: hello-echo
+  namespace: ns-dev
+spec:
+  type: NodePort
+  ports:
+  - name: "http-1323"
+    port: 1323
+    targetPort: 1323
+    nodePort: 31323
+  selector:
+    system: hello-echo
+    app: hello-echo
+    version: "1.0"
+
