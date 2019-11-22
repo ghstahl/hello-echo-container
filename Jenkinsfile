@@ -21,7 +21,7 @@ spec:
   serviceAccountName: jenkins
   containers:
   - name: helm
-    image: lachlanevenson/k8s-helm:v2.9.1
+    image: lachlanevenson/k8s-helm:v2.16.1
     command:
     - cat
     tty: true
@@ -51,6 +51,15 @@ spec:
         }
       }
      }
+    }
+    stage('Publish To K8S') {
+      steps {
+        container('helm') {
+          withCredentials([azureServicePrincipal('azurecli')]) {
+            sh 'helm version'
+          }
+        }
+      }
     }
   }
 }
