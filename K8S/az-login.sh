@@ -4,7 +4,7 @@ STRING="== AZ LOGIN =="
 #print variable on a screen
 echo $STRING
 
-# az login 
+az login
 # View subscriptions
 az account list
 

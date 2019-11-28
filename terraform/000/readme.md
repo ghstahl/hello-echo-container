@@ -5,8 +5,9 @@ Call setup-azure-terraform.sh once to setup a backend storage account for your t
 The access_key to the storage account will be put into a key vault which you can then get by calling this;
 
 bash```
-# export ARM_ACCESS_KEY=$(az keyvault secret show --name terraform-backend-key --vault-name kvterraform23017 --query value -o tsv)
-
+```
+bash```
+export ARM_ACCESS_KEY=$(az keyvault secret show --name terraform-backend-key --vault-name kvterraform29701 --query value -o tsv)   
 ```
 
 You can't call  

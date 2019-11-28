@@ -1,5 +1,4 @@
 #!/bin/bash
-
 # https://docs.microsoft.com/en-us/azure/terraform/terraform-backend 
 # https://docs.microsoft.com/en-us/azure/key-vault/quick-create-cli
 
