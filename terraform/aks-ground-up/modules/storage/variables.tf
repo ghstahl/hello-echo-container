@@ -35,10 +35,11 @@ variable "blob_encryption" {
 
 variable "file_encryption" {
   description = "Whether Encryption Services should be enabled for file storage"
-  default     = false
+  default     = true
 }
 
 variable "encryption_key_source" {
   description = "Encryption key source for the storage account. Valid values are : 'Microsoft.Keyvault' and 'Microsoft.Storage'."
   default     = "Microsoft.Storage"
 }
+
