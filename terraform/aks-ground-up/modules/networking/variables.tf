@@ -21,3 +21,16 @@ variable "subnet_name" {
   description = "Name of the virtual network subnet"
   type        = string
 }
+variable "public_ip_name" {
+  description = "Name of the public IP resource"
+}
+variable "public_ip_allocation_method" {
+  description = "Allocation method for public IP address. Valid values are : 'Static' or 'Dynamic'."
+  type        = string
+  default     = "Dynamic"
+}
+
+variable "public_ip_dns_label" {
+  description = "Label for the DNS Name. Will be used to make up the FQDN of the public IP."
+  type        = string
+}

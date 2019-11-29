@@ -52,3 +52,11 @@ resource "azurerm_subnet_network_security_group_association" "nsga-subnet-dev" {
   subnet_id                 = azurerm_subnet.subnet_dev.id
   network_security_group_id = azurerm_network_security_group.nsg.id
 }
+
+resource "azurerm_public_ip" "ip" {
+  name                = var.public_ip_name
+  resource_group_name = var.resource_group_name
+  location            = var.location
+  allocation_method   = var.public_ip_allocation_method
+  domain_name_label   = var.public_ip_dns_label
+}
