@@ -34,3 +34,9 @@ variable "public_ip_dns_label" {
   description = "Label for the DNS Name. Will be used to make up the FQDN of the public IP."
   type        = string
 }
+
+variable "tags" {
+  description = "Tags to help identify various services."
+  type        = map
+  default = {}
+}

@@ -29,3 +29,33 @@ variable "registry_name" {
   description = "Label for the DNS Name. Will be used to make up the FQDN of the public IP."
   type        = string
 }
+
+variable "network_tags" {
+  description = "network tags to help identify various services."
+  type        = map
+  default = {
+    AppName        = "app-ground-up"
+    BusinessUnit   = "Plant Department"
+    Classification = "confidential"
+    CostCenter     = "000-00000-0000"
+    DeployedBy     = "terraform"
+    Environment    = "global"
+    OwnerEmail     = "DL-P7-OPS@groundup.com"
+    Platform       = "na" # does not apply to us.
+  }
+}
+
+variable "tags" {
+  description = "Tags to help identify various services."
+  type        = map
+  default = {
+    AppName        = "app-ground-up"
+    BusinessUnit   = "Plant Department"
+    Classification = "confidential"
+    CostCenter     = "000-00000-0000"
+    DeployedBy     = "terraform"
+    Environment    = "prod"
+    OwnerEmail     = "DL-P7-OPS@groundup.com"
+    Platform       = "na" # does not apply to us.
+  }
+}

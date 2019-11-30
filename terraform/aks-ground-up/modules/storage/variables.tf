@@ -43,3 +43,8 @@ variable "encryption_key_source" {
   default     = "Microsoft.Storage"
 }
 
+variable "tags" {
+  description = "Tags to help identify various services."
+  type        = map
+  default = {}
+}

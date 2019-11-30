@@ -22,8 +22,9 @@ variable "admin_user_enabled" {
   description = " Whether the admin user should be enabled."
   default     = false
 }
-
-variable "storage_account_id" {
-  description = "ID of a Storage Account which must be located in the same Azure Region as the registry."
-  type        = string
+ 
+variable "tags" {
+  description = "Tags to help identify various services."
+  type        = map
+  default = {}
 }

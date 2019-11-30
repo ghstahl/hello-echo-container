@@ -18,10 +18,12 @@ locals {
 resource "azurerm_resource_group" "rg" {
   name     = "rg-${var.resource_group_name}"
   location = var.location
+  tags     = var.tags
 }
 
 module "storage" {
   source               = "./modules/storage"
+  tags                 = var.tags
   storage_account_name = local.storage_account_name
   resource_group_name  = azurerm_resource_group.rg.name
   location             = azurerm_resource_group.rg.location
@@ -29,6 +31,7 @@ module "storage" {
 }
 module "networking" {
   source              = "./modules/networking"
+  tags                = var.network_tags
   resource_group_name = azurerm_resource_group.rg.name
   location            = azurerm_resource_group.rg.location
   public_ip_name      = format("pip-%s",local.resource_prefix)
@@ -39,8 +42,8 @@ module "networking" {
 }
 module "acr" {
   source              = "./modules/acr"
+  tags                = var.tags
   registry_name       = local.acr_name
   resource_group_name = azurerm_resource_group.rg.name
   location            = azurerm_resource_group.rg.location
-  storage_account_id  = module.storage.storage_account_id
 }

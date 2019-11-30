@@ -4,5 +4,5 @@ resource "azurerm_container_registry" "acr" {
   location            = var.location
   sku                 = var.registry_sku
   admin_enabled       = var.admin_user_enabled
-  storage_account_id  = var.storage_account_id
+  tags                = var.tags
 }
