@@ -28,7 +28,7 @@ resource "azurerm_resource_group" "rg_network" {
 
  
 module "networking" {
-  source              = "../modules/networking"
+  source              = "../../modules/networking"
   tags                = var.network_tags
   resource_group_name = azurerm_resource_group.rg_network.name
   location            = azurerm_resource_group.rg_network.location
@@ -39,7 +39,7 @@ module "networking" {
   subnet_name         = format("snet-%s",local.resource_prefix)
 } 
 module "storage" {
-  source               = "../modules/storage"
+  source               = "../../modules/storage"
   tags                 = var.tags
   storage_account_name = local.storage_account_name
   resource_group_name  = azurerm_resource_group.rg.name
@@ -47,7 +47,7 @@ module "storage" {
   storage_account_tier = var.storage_account_tier
 }
 module "acr" {
-  source              = "../modules/acr"
+  source              = "../../modules/acr"
   tags                = var.tags
   registry_name       = local.acr_name
   resource_group_name = azurerm_resource_group.rg.name
