@@ -16,19 +16,40 @@ locals {
 }
 
 resource "azurerm_resource_group" "rg" {
-  name     = "rg-${var.resource_group_name}"
+  name     = format("rg-%s",var.resource_group_name)
   location = var.location
   tags     = var.tags
 }
+resource "azurerm_resource_group" "rg_network" {
+  name     = format("rg-network-%s",var.resource_group_name)
+  location = var.location
+  tags     = var.tags
+}
+
  
 module "networking" {
   source              = "../modules/networking"
   tags                = var.network_tags
-  resource_group_name = azurerm_resource_group.rg.name
-  location            = azurerm_resource_group.rg.location
+  resource_group_name = azurerm_resource_group.rg_network.name
+  location            = azurerm_resource_group.rg_network.location
   public_ip_name      = format("pip-%s",local.resource_prefix)
   public_ip_dns_label = local.public_ip_dns_label
   nsg_name            = format("nsg-%s",local.resource_prefix)
   vnet_name           = format("vnet-%s",local.resource_prefix)
   subnet_name         = format("snet-%s",local.resource_prefix)
 } 
+module "storage" {
+  source               = "../modules/storage"
+  tags                 = var.tags
+  storage_account_name = local.storage_account_name
+  resource_group_name  = azurerm_resource_group.rg.name
+  location             = azurerm_resource_group.rg.location
+  storage_account_tier = var.storage_account_tier
+}
+module "acr" {
+  source              = "../modules/acr"
+  tags                = var.tags
+  registry_name       = local.acr_name
+  resource_group_name = azurerm_resource_group.rg.name
+  location            = azurerm_resource_group.rg.location
+}
