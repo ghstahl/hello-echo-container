@@ -5,7 +5,7 @@ resource "azurerm_kubernetes_cluster" "main" {
   location            = var.location
   resource_group_name = var.resource_group_name
   linux_profile {
-    admin_username = "admin"
+    admin_username = "azureuser"
 
     ssh_key {
       key_data = file(var.public_ssh_key_path)
@@ -24,7 +24,7 @@ resource "azurerm_kubernetes_cluster" "main" {
     enable_node_public_ip = false
     min_count             = "1"
     max_count             = "5"
-    vm_size               = "Standard_B2s"
+    vm_size               = "Standard_DS2_v2"
   
     vnet_subnet_id        = var.subnet_id
     

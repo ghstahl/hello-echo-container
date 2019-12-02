@@ -7,7 +7,10 @@ variable "resource_prefix" {
   type        = string
 }
 
-
+variable "admin_username" {
+  default     = "azureuser"
+  description = "The username of the local administrator to be created on the Kubernetes cluster"
+}
 
 variable "location" {
   description = "Azure region where resources will be located"
