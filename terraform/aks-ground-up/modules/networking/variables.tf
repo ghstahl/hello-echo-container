@@ -35,6 +35,11 @@ variable "public_ip_dns_label" {
   type        = string
 }
 
+variable "base_address_space_ip" {
+  description = "The IP base i.e.  10.0.0.0 to be then carved up into subnets..."
+  type        = string
+}
+
 variable "tags" {
   description = "Tags to help identify various services."
   type        = map

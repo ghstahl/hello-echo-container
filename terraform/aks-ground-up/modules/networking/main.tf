@@ -12,7 +12,7 @@ resource "azurerm_virtual_network" "vnet" {
   name                  = var.vnet_name
   resource_group_name   = var.resource_group_name
   location              = var.location
-  address_space         = ["10.0.0.0/16"]
+  address_space         = [format("%s/16",var.base_address_space_ip)]
   tags                  = var.tags
 
 }

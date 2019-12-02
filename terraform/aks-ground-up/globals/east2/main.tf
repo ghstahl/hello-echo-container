@@ -12,6 +12,7 @@ locals {
   default_acr_name             = "${local.resource_suffix}"
   acr_name                     = "acr${var.registry_name != "" ? var.registry_name : local.default_acr_name}"
   public_ip_dns_label          = var.public_ip_dns_label
+  base_address_space_ip        = "10.1.0.0"
    
 }
 
@@ -28,15 +29,16 @@ resource "azurerm_resource_group" "rg_network" {
 
  
 module "networking" {
-  source              = "../../modules/networking"
-  tags                = var.network_tags
-  resource_group_name = azurerm_resource_group.rg_network.name
-  location            = azurerm_resource_group.rg_network.location
-  public_ip_name      = format("pip-%s",local.resource_prefix)
-  public_ip_dns_label = local.public_ip_dns_label
-  nsg_name            = format("nsg-%s",local.resource_prefix)
-  vnet_name           = format("vnet-%s",local.resource_prefix)
-  subnet_name         = format("snet-%s",local.resource_prefix)
+  source                = "../../modules/networking"
+  tags                  = var.network_tags
+  resource_group_name   = azurerm_resource_group.rg_network.name
+  location              = azurerm_resource_group.rg_network.location
+  public_ip_name        = format("pip-%s",local.resource_prefix)
+  public_ip_dns_label   = local.public_ip_dns_label
+  nsg_name              = format("nsg-%s",local.resource_prefix)
+  vnet_name             = format("vnet-%s",local.resource_prefix)
+  subnet_name           = format("snet-%s",local.resource_prefix)
+  base_address_space_ip = local.base_address_space_ip
 } 
 module "storage" {
   source               = "../../modules/storage"
