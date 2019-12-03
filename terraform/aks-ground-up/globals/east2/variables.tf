@@ -7,7 +7,14 @@ variable "resource_prefix" {
   type        = string
 }
 
-
+variable "client_id" {
+  description = "The service principal client id"
+  type        = string
+}
+variable "client_secret" {
+  description = "The service principal client secret"
+  type        = string
+}
 
 variable "location" {
   description = "Azure region where resources will be located"

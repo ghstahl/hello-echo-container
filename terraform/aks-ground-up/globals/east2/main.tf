@@ -40,6 +40,18 @@ module "networking" {
   subnet_name           = format("snet-%s",local.resource_prefix)
   base_address_space_ip = local.base_address_space_ip
 } 
+
+module "permissions" {
+   source = "../../modules/permissions"
+   #  az ad sp list -o json --all --query "[?contains(displayName,'sp-aks-ground-up')].objectId"
+   principal_id = "1902d860-7888-4005-a95d-6de910a3ce96"
+   resource_group_id = azurerm_resource_group.rg_network.id
+
+}
+
+ # "729e4455-387c-4d39-8fed-12e63c2f87fc",
+  #"f2f620d4-bc81-47e9-8a24-9a797c70b129"
+
 module "storage" {
   source               = "../../modules/storage"
   tags                 = var.tags
