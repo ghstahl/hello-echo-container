@@ -12,7 +12,8 @@ locals {
   default_acr_name             = "${local.resource_suffix}"
   acr_name                     = "acr${var.registry_name != "" ? var.registry_name : local.default_acr_name}"
   public_ip_dns_label          = var.public_ip_dns_label
-  base_address_space_ip        = "10.1.0.0"
+  base_address_space_ip        = "10.111.0.0"
+  agent_subnet_mask            =  "23"
    
 }
 
@@ -39,27 +40,24 @@ module "networking" {
   vnet_name             = format("vnet-%s",local.resource_prefix)
   subnet_name           = format("snet-%s",local.resource_prefix)
   base_address_space_ip = local.base_address_space_ip
+  cidrsubnet_newbits     = 7
 } 
-
-data "azuread_service_principal" "sp_aks_ground_up" {
-  application_id = "f01d863a-8282-4980-be0d-50fd8404bdb0"
+module "service_principal" {
+  source = "innovationnorway/service-principal/azuread"
+  name   = "sp-aks-ground-up"
 }
 
-module "permissions_rg_network" {
-   source = "../../modules/permissions"
-   #  az ad sp list -o json --all --query "[?contains(displayName,'sp-aks-ground-up')].objectId"
-   principal_id = data.azuread_service_principal.sp_aks_ground_up.id
-   resource_group_id = azurerm_resource_group.rg_network.id
-
+resource "azurerm_role_assignment" "role_network_contributor" {
+  scope                = azurerm_resource_group.rg_network.id
+  role_definition_name = "Network Contributor"
+  principal_id         = module.service_principal.object_id
+}
+resource "azurerm_role_assignment" "role_contributor" {
+  scope                = azurerm_resource_group.rg.id
+  role_definition_name = "Contributor"
+  principal_id         = module.service_principal.object_id
 }
 
-module "permissions_rg" {
-   source = "../../modules/permissions"
-   #  az ad sp list -o json --all --query "[?contains(displayName,'sp-aks-ground-up')].objectId"
-   principal_id = data.azuread_service_principal.sp_aks_ground_up.id
-   resource_group_id = azurerm_resource_group.rg.id
-
-}
 module "storage" {
   source               = "../../modules/storage"
   tags                 = var.tags

@@ -15,7 +15,10 @@ variable "client_secret" {
   description = "The service principal client secret"
   type        = string
 }
-
+variable "subscription_id" {
+  description = "The subscription id"
+  type        = string
+}
 variable "location" {
   description = "Azure region where resources will be located"
   type        = string
