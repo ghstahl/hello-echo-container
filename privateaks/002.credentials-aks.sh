@@ -5,3 +5,5 @@ AKS_NAME="aks-private-cluster"
 az aks get-credentials --resource-group $RESOURCE_GROUP_NAME --name $AKS_NAME
 
 
+kubectl get nodes
+kubectl cluster-info

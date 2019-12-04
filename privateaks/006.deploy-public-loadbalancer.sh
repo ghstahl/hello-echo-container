@@ -1,0 +1,1 @@
+kubectl apply -f voting-private-public-loadbalancer.yaml

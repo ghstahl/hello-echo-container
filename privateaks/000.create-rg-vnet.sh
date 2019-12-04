@@ -7,10 +7,12 @@ SUBNET_NAME="snet-aks"
 az aks install-cli
 
 az group create --name $RESOURCE_GROUP_NAME --location $LOCATION
+
+
 az network vnet create \
---resource-group $RESOURCE_GROUP_NAME \
---name $VNET_NAME \
---address-prefix 10.10.0.0/16 \
---subnet-name $SUBNET_NAME \
---subnet-prefix 10.10.0.0/23
+    --resource-group $RESOURCE_GROUP_NAME \
+    --name $VNET_NAME \
+    --address-prefix 10.10.0.0/16 \
+    --subnet-name $SUBNET_NAME \
+    --subnet-prefix 10.10.0.0/23
 

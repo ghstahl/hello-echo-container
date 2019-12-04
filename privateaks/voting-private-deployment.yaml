@@ -45,30 +45,4 @@ spec:
         env:
         - name: REDIS
           value: "azure-vote-back"
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: azure-vote-front
-  annotations:
-    service.beta.kubernetes.io/azure-load-balancer-internal: "true"
-spec:
-  type: LoadBalancer
-  ports:
-  - port: 80
-  selector:
-    app: azure-vote-front
-
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: azure-vote-front-external
-  annotations:
-    service.beta.kubernetes.io/azure-load-balancer-internal: "false"
-spec:
-  type: LoadBalancer
-  ports:
-  - port: 80
-  selector:
-    app: azure-vote-front
+ 
