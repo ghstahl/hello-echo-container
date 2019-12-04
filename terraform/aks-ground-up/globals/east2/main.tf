@@ -57,6 +57,11 @@ resource "azurerm_role_assignment" "role_contributor" {
   role_definition_name = "Contributor"
   principal_id         = module.service_principal.object_id
 }
+resource "azurerm_role_assignment" "role_storage_account_contributor" {
+  scope                = azurerm_resource_group.rg.id
+  role_definition_name = "Storage Account Contributor"
+  principal_id         = module.service_principal.object_id
+}
 
 module "storage" {
   source               = "../../modules/storage"
