@@ -23,7 +23,7 @@ resource "azurerm_subnet" "subnet_prod" {
   virtual_network_name      = azurerm_virtual_network.vnet.name
 
   # Taking the second /24 subnet from the first IP range of the virtual network
-  address_prefix            = cidrsubnet(azurerm_virtual_network.vnet.address_space[0], 8, 0)
+  address_prefix            = cidrsubnet(azurerm_virtual_network.vnet.address_space[0], var.cidrsubnet_newbits, 0)
   lifecycle { 
      ignore_changes = [network_security_group_id]
  }
@@ -40,7 +40,7 @@ resource "azurerm_subnet" "subnet_stage" {
   virtual_network_name      = azurerm_virtual_network.vnet.name
 
   # Taking the second /24 subnet from the first IP range of the virtual network
-  address_prefix            = cidrsubnet(azurerm_virtual_network.vnet.address_space[0], 8, 1)
+  address_prefix            = cidrsubnet(azurerm_virtual_network.vnet.address_space[0], var.cidrsubnet_newbits, 1)
   lifecycle { 
      ignore_changes = [network_security_group_id]
  }
@@ -57,7 +57,7 @@ resource "azurerm_subnet" "subnet_dev" {
   virtual_network_name      = azurerm_virtual_network.vnet.name
 
   # Taking the second /24 subnet from the first IP range of the virtual network
-  address_prefix            = cidrsubnet(azurerm_virtual_network.vnet.address_space[0], 8, 2)
+  address_prefix            = cidrsubnet(azurerm_virtual_network.vnet.address_space[0], var.cidrsubnet_newbits, 2)
   lifecycle { 
      ignore_changes = [network_security_group_id]
  }

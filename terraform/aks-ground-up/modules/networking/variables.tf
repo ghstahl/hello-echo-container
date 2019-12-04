@@ -39,6 +39,11 @@ variable "base_address_space_ip" {
   description = "The IP base i.e.  10.0.0.0 to be then carved up into subnets..."
   type        = string
 }
+variable "cidrsubnet_newbits" {
+  description = "The cidrsubnet(prefix, newbits, netnum)"
+  type        = number
+}
+
 
 variable "tags" {
   description = "Tags to help identify various services."
