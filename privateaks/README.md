@@ -1,3 +1,6 @@
+# References
+[deploying-internal-applications-with-private-ips-on-azure-kubernetes-service-aks](https://clemenssiebler.com/deploying-internal-applications-with-private-ips-on-azure-kubernetes-service-aks/)  
+
 # 000 Create Network
 ```bash
 ./000.create-rg-vnet.sh
