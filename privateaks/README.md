@@ -328,7 +328,7 @@ i.e. http://10.10.0.5
 # 006 Create a public Load Balancer
 
 ```bash
- ./006.deploy-public-loadbalancer.sh   
+ ./006.a.deploy-public-loadbalancer.sh 
 ```
 ```
 service/azure-vote-front-external created
