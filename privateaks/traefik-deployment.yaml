@@ -93,5 +93,5 @@ spec:
           image: ghstahl/hello-echo
           ports:
             - name: web
-              containerPort: 1323
+              containerPort: 80
           

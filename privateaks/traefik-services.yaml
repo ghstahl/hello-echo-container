@@ -38,7 +38,6 @@ spec:
     - protocol: TCP
       name: web
       port: 80
-      targetPort: 1323
   selector:
     app: hello-echo
 

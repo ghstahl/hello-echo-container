@@ -21,5 +21,6 @@ COPY --from=builder /dist/app .
 # Serves up the UI portion of the web app.
  
 # COPY --from=builder /dist/config ./config
-EXPOSE 1323
+ENV PORT=80
+EXPOSE 80
 ENTRYPOINT ["./app"]
