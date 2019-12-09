@@ -1,0 +1,70 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: traefik
+
+spec:
+  type: LoadBalancer
+  ports:
+    - protocol: TCP
+      name: web
+      port: 8000
+    - protocol: TCP
+      name: admin
+      port: 8080
+  selector:
+    app: traefik
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: whoami
+
+spec:
+  ports:
+    - protocol: TCP
+      name: web
+      port: 80
+  selector:
+    app: whoami
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: hello-echo
+spec:
+  ports:
+    - protocol: TCP
+      name: web
+      port: 80
+      targetPort: 1323
+  selector:
+    app: hello-echo
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: azure-vote-back
+spec:
+  ports:
+  - port: 6379
+  selector:
+    app: azure-vote-back
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: svc-azure-vote-front
+
+spec:
+  ports:
+    - protocol: TCP
+      name: web
+      port: 80
+  selector:
+    app: azure-vote-front
+
+ 

@@ -1,0 +1,64 @@
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: externaldns
+---
+apiVersion: rbac.authorization.k8s.io/v1beta1
+kind: Role
+metadata:
+  name: externaldns
+rules:
+- apiGroups: [""]
+  resources: ["services"]
+  verbs: ["get","watch","list"]
+- apiGroups: [""]
+  resources: ["pods"]
+  verbs: ["get","watch","list"]
+- apiGroups: ["extensions"]
+  resources: ["ingresses"]
+  verbs: ["get","watch","list"]
+---
+apiVersion: rbac.authorization.k8s.io/v1beta1
+kind: RoleBinding
+metadata:
+  name: externaldns
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: Role
+  name: externaldns
+subjects:
+- kind: ServiceAccount
+  name: externaldns
+---
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: externaldns
+spec:
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: externaldns
+    spec:
+      serviceAccountName: externaldns
+      containers:
+      - name: externaldns
+        image: registry.opensource.zalan.do/teapot/external-dns:latest
+        args:
+        - --source=service
+        - --source=ingress
+        - --domain-filter=privateaks.com
+        - --provider=azure-private-dns
+        - --azure-resource-group=externaldns
+        - --azure-subscription-id=<use the id of your subscription>
+        env:
+        - name: AZURE_TENANT_ID
+          value: "3b217a9b-6c58-428b-b022-5ad741ce2016"
+        - name: AZURE_CLIENT_ID
+          value: "f01d863a-8282-4980-be0d-50fd8404bdb0"
+        - name: AZURE_CLIENT_SECRET
+          value: "[ji1:QPxjC/]0xn0kWU6QUu3rfvAX9YA"
+
+ 

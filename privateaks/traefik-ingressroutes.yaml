@@ -1,0 +1,47 @@
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: simpleingressroute
+  namespace: default
+spec:
+  entryPoints:
+    - web
+  routes:
+  - match: PathPrefix(`/notls`)
+    kind: Rule
+    services:
+    - name: whoami
+      port: 80
+
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: simpleingressroute-hello-echo
+  namespace: default
+spec:
+  entryPoints:
+    - web
+  routes:
+  - match: PathPrefix(`/hello-echo/`)
+    kind: Rule
+    services:
+    - name: hello-echo
+      port: 80
+
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: simpleingressroute-voting
+  namespace: default
+spec:
+  entryPoints:
+    - web
+  routes:
+  - match: PathPrefix(`/voting`)
+    kind: Rule
+    services:
+    - name: svc-azure-vote-front
+      port: 80

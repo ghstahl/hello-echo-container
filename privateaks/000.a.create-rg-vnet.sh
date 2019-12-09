@@ -8,7 +8,6 @@ az aks install-cli
 
 az group create --name $RESOURCE_GROUP_NAME --location $LOCATION
 
-
 az network vnet create \
     --resource-group $RESOURCE_GROUP_NAME \
     --name $VNET_NAME \
