@@ -1,5 +1,5 @@
 # Terraform Setup
-[azure terraform-backend] (https://docs.microsoft.com/en-us/azure/terraform/terraform-backend)  
+[azure terraform-backend](https://docs.microsoft.com/en-us/azure/terraform/terraform-backend)  
 
 Call setup-azure-terraform.sh once to setup a backend storage account for your tstate.
 The access_key to the storage account will be put into a key vault which you can then get by calling this;
